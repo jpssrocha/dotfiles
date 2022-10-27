@@ -82,7 +82,7 @@ set colorcolumn=81
 " General mappings
 noremap <F6> :setlocal spell! spelllang=en_us<CR>
 noremap <F7> :setlocal spell! spelllang=pt_br<CR>
-noremap <leader>rc :split ~/.config/init.vim<CR>
+noremap <leader>rc :split ~/dotfiles/vim/.config/nvim/init.vim<CR>
 noremap <C-s> :w<CR>
 noremap <F8> :set nohls! hls?<CR>
 noremap <leader>t :.!date +"\# \%d-\%m-\%Y \%H:\%M" <Enter>o<Enter>
@@ -91,7 +91,7 @@ vnoremap <leader>r "hy:%s/<C-r>h//gc<left><left><left>
 " Dumb remaps
 nnoremap Y y$
 nnoremap Q q
-nnoremap gD :s/^.\+$//<CR>
+" nnoremap gD :s/^.\+$//<CR>
 
 "" Make Ctrl I and Ctrl O ocidental! (right goes foward)
 noremap <C-o> <C-i>
@@ -137,14 +137,14 @@ autocmd FileType tex noremap <F2> :w<Enter>:!pdflatex %  <Enter>
 autocmd FileType tex noremap <F3> :!zathura $(echo $(echo %.pdf \| cut -f1 -d.).pdf) &<Enter><Enter>
 
 " Markdown
-" autocmd FileType markdown noremap <F2> :w<Enter> :!pandoc \
-"             \--filter pandoc-citeproc \
-"             \--from=markdown+tex_math_single_backslash+tex_math_dollars+raw_tex \
-"             \--to=latex \
-"             \--output=test.pdf \
-"             \--pdf-engine=xelatex \
-"             \-V geometry:"top=2cm, bottom=1.5cm, left=2cm, right=2cm" \
-"             \-o $(echo %:r.pdf) %  <Enter>
+autocmd FileType markdown noremap <F2> :w<Enter> :!pandoc \
+             \--filter pandoc-citeproc \
+             \--from=markdown+tex_math_single_backslash+tex_math_dollars+raw_tex \
+             \--to=latex \
+             \--output=test.pdf \
+             \--pdf-engine=xelatex \
+             \-V geometry:"top=2cm, bottom=1.5cm, left=2cm, right=2cm" \
+             \-o $(echo %:r.pdf) %  <Enter>
 autocmd FileType markdown noremap <F3> :!zathura $(echo $(echo % \| rev \| cut -f1 -d/ \| rev \| cut -f1 -d.).pdf) &<Enter><Enter>
 autocmd FileType markdown nnoremap <leader>h :r ~/Dropbox/.latex/markdown_header.md<Enter>kdd<leader>n
 autocmd FileType markdown :hi link markdownError Normal<cr>
