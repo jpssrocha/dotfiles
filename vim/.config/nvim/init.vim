@@ -25,6 +25,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'alvan/vim-closetag'
 Plug 'pantharshit00/vim-prisma'
 Plug 'starcraftman/vim-eclim'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
@@ -94,8 +95,8 @@ nnoremap Q q
 " nnoremap gD :s/^.\+$//<CR>
 
 "" Make Ctrl I and Ctrl O ocidental! (right goes foward)
-noremap <C-o> <C-i>
-noremap <C-i> <C-o>
+" noremap <C-o> <C-i>
+" noremap <C-i> <C-o>
 
 " Move text
 vnoremap J :m '>+1<CR>gv=gv
@@ -147,8 +148,8 @@ autocmd FileType markdown noremap <F2> :w<Enter> :!pandoc \
              \-o $(echo %:r.pdf) %  <Enter>
 autocmd FileType markdown noremap <F3> :!zathura $(echo $(echo % \| rev \| cut -f1 -d/ \| rev \| cut -f1 -d.).pdf) &<Enter><Enter>
 autocmd FileType markdown nnoremap <leader>h :r ~/Dropbox/.latex/markdown_header.md<Enter>kdd<leader>n
-autocmd FileType markdown :hi link markdownError Normal<cr>
-au BufEnter *.md :lcd %:p:h
+" autocmd FileType markdown :hi link markdownError Normal<cr>
+autocmd BufEnter *.md :lcd %:p:h
 
 " Python
 autocmd FileType python noremap <F2> :w<Enter>:T python % <Enter>
@@ -157,8 +158,11 @@ autocmd FileType python vnoremap <leader>c I#  <Esc>
 autocmd FileType python vnoremap <leader>uc :s/#//g<Enter>
 autocmd FileType python noremap <leader>py :T acb; ipython<cr>
 
+" C
+autocmd FileType c noremap <F2> :!gcc % -o $(echo % \| cut -f1 -d.)<Enter>:! ./$(echo % \| cut -f1 -d.)<Enter>
+
 " HTML
-autocmd FileType html noremap <F2> :w<Enter>:!xdg-open % & <Enter>
+autocmd FileType html noremap <F2> :w<Enter>:!xdg-open %  <Enter><Enter>
 
 " JS
 autocmd BufNewFile,BufRead *.ejs set filetype=html
@@ -185,16 +189,20 @@ nnoremap <leader>gp :Git push<CR>
 nnoremap <leader>gdf :Git diff<CR>
 
 " Coc tab completion
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+
+
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+
+" noremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 
 
 " fzf
@@ -210,6 +218,7 @@ let g:vimwiki_list = [{'path': '~/Dropbox/eBrain/vimwiki',
 let g:vimwiki_global_ext = 0 " Fix markdown file bug due to vimwiki (issue 871)
 autocmd FileType vimwiki noremap <F2> :w<Enter> :VimwikiAll2HTML<Enter>
 autocmd FileType vimwiki noremap <F3> :Vimwiki2HTMLBrowse<Enter>
+autocmd BufEnter *.wiki :lcd %:p:h
 
 " COC
 nmap <silent> gd <Plug>(coc-definition)
@@ -235,6 +244,10 @@ function! ShowDocumentation()
   endif
 endfunction
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
 " Sneak
 let g:sneak#label = 1

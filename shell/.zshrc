@@ -103,17 +103,21 @@ source $ZSH/oh-my-zsh.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/joaopedro/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/joaopedro/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/joaopedro/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/joaopedro/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/home/joaopedro/mambaforge/etc/profile.d/conda.sh" ]; then
+        . "/home/joaopedro/mambaforge/etc/profile.d/conda.sh"
     else
-        export PATH="/home/joaopedro/anaconda3/bin:$PATH"
+        export PATH="/home/joaopedro/mambaforge/bin:$PATH"
     fi
 fi
 unset __conda_setup
+
+if [ -f "/home/joaopedro/mambaforge/etc/profile.d/mamba.sh" ]; then
+    . "/home/joaopedro/mambaforge/etc/profile.d/mamba.sh"
+fi
 # <<< conda initialize <<<
 
 # Custom environment variables
@@ -126,8 +130,9 @@ export PKG_CONFIG_PATH="$HOME/anaconda3/lib/pkgconfig"
 export PJT="$HOME/MEGA/Projects"
 export WD="$HOME/MEGA/WD"
 export ARCHIVE="$HOME/MEGA/Archive"
+export REF="$HOME/MEGA/Reference"
 export WDP="$PJT/active/Research_Wild-Duck-Pipeline_1-1-2019/res/WildDuckPipe"
-# export PYTHONPATH="$HOME/Dropbox/py_quick_access:$WDP"
+export PYTHONPATH="$HOME/Dropbox/py_quick_access:$WDP:$PJT/active/Research_RRLyr-Completeness_25-04-2021/res/gaia_getter"
 export EDITOR="nvim"
 export NOTES="$HOME/Dropbox/Notebooks"
 export DATA="$HOME/Documents/Data" # Data of data-intensive projects
@@ -136,8 +141,9 @@ export DATA="$HOME/Documents/Data" # Data of data-intensive projects
 
 #   Vim
 alias vi="nvim"
+alias vrc="nvim ~/dotfiles/vim/.config/nvim/init.vim"
 alias vf='vi -c Files'
-alias vw='cd ~/Dropbox/eBrain/vimwiki && vi -c VimwikiIndex'
+alias vw='vi -c VimwikiIndex'
 alias vs='cd  ~/.local/share/nvim/swap'
 
 #   Filesystem
@@ -157,32 +163,32 @@ alias python="python3"
 alias ipy="ipython"
 alias acb="conda activate base"
 alias jn="jupyter notebook"
-alias flow="loffice $WD/finances/flow_11-05-2022.csv"
-alias savings="vi -c 'norm G' /home/joaopedro/Dropbox/eBrain/finances/flow_savings.csv"
-alias balance="vi -c 'norm G' /home/joaopedro/Dropbox/eBrain/finances/accounts.csv"
 
 #   Utils
 alias ds9="ds9 -scale mode zscale -zoom .25"
 export md2pdf="pandoc --pdf-engine=xelatex --variable geometry:\"top=2cm, bottom=1.5cm, left=2.5cm, right=2.5cm\" --variable fontsize:12pt -o"
 alias scc="ffmpeg -y -f x11grab -s $(xdpyinfo | grep dimensions | awk '{print $2}') -i :0.0  -f alsa -i default  -c:v libx264 -r 30 -c:a flac"
-alias planner="flatpak run com.github.alainm23.planner &"
+
+# Easy access
+alias flow="loffice $WD/finances/res/legacy_system/flow_11-05-2022.csv"
+alias savings="vi -c 'norm G' /home/joaopedro/Dropbox/eBrain/finances/res/legacy_system/flow_savings.csv"
+alias balance="vi -c 'norm G' /home/joaopedro/Dropbox/eBrain/finances/res/legacy_system/accounts.csv"
 
 # Functions
-pjt () {cd $(find $PJT -type d |  fzf)};
+pjt () {cd $(find $PJT -type d -not -path '*/.*' -not -path '*/node_modules*' |  fzf)};
+ref () {cd $(find $REF -type d |  fzf)};
 arc () {cd $(find $ARCHIVE -type d |  fzf)};
-docs () {cd $(find $PJT/active $PJT/parked $PJT/standby -type d -name docs |  fzf) && vi -c Files}
+docs () {cd $(find $PJT/active $PJT/parked $PJT/incubation -type d -name docs |  fzf) && vi -c Files}
 cnt () {cd $(find $NOTES -type d | fzf)};
-fh () {cd $(find . -type d | fzf)};
+fh () {cd $(find . -type d -not -path '*/.*' -not -path '*/node_modules*'| fzf)};
 
-# save path on cd (This saves a looot of time)
 function cd {
-    builtin cd $@
-    pwd > ~/.last_dir
+ builtin cd $@
+ pwd > ~/.last_dir
 }
 
-# restore last saved path
 if [ -f ~/.last_dir ]
-    then cd `cat ~/.last_dir`
+ then cd `cat ~/.last_dir`
 fi
 
 # Plugins
@@ -194,10 +200,10 @@ source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 # Python stuff
 export PIPENV_VENV_IN_PROJECT=1
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 # Node stuff
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+
+[ -f "/home/joaopedro/.ghcup/env" ] && source "/home/joaopedro/.ghcup/env" # ghcup-env
 

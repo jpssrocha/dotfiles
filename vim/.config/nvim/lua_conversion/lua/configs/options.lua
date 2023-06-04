@@ -1,4 +1,26 @@
-local options = {
+-- Commands
+
+local commands = {
+    -- Sane default configs to make sure that are in place
+    [[filetype plugin indent on]],
+    [[syntax on]],
+    -- [[scriptencoding utf-8]],
+
+    -- Operational commands
+    [[highlight ColorColumn ctermbg=0 guibg=lightgrey]],
+    -- [[path+=**]],
+
+    -- Plugins
+    -- [[source $HOME/.config/nvim/plug-config/coc.vim]],
+    -- [[colorscheme gruvbox]],  -- Use Gruuuvbox!
+}
+
+-- Apply commands
+for i = 1, #commands do
+    vim.cmd(commands[i])
+end
+
+local g_options = {
 
     -- Encoding (necessary to use ç)
     encoding="utf-8",
@@ -33,34 +55,14 @@ local options = {
 
     cursorline = true,  --  cursorcolumn
 
-    colorcolumn = 81, -- Color Column
+    colorcolumn = {textwidth = 81} -- Color Column
 }
 
 -- Apply configs
 
-for key, val in pairs(options) do
+for key, val in pairs(g_options) do
+    print(key, val)
     vim.opt[key] = val
 end
 
--- Commands
-
-local commands = {
-    -- Sane default configs to make sure that are in place
-    [[filetype plugin indent on]],
-    [[syntax on]],
-    [[scriptencoding utf-8]],
-
-    -- Operational commands
-    [[highlight ColorColumn ctermbg=0 guibg = lightgrey]],
-    [[path+=**]],
-
-    -- Plugins
-    [[source $HOME/.config/nvim/plug-config/coc.vim]],
-    [[colorscheme gruvbox]],  -- Use Gruuuvbox!
-}
-
--- Apply commands
-for i = 1, #commands do
-    vim.cmd(commands[i])
-end
 

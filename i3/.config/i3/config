@@ -200,12 +200,8 @@ bindsym $mod+b exec pcmanfm-qt
 
 # General Shortcuts
 
-bindsym $mod+t exec todo; exec sxiv ~/Pictures/gtd.jpg;
-bindsym $mod+p exec $term -e sp
-
-## VimWiki Floating Window
-for_window [window_role=floating_term] floating enable
-bindsym $mod+Shift+v exec --no-startup-id  $term -c "floating_term" -e nvim 
+bindsym $mod+t exec sxiv ~/Pictures/gtd.jpg;
+bindsym $mod+Shift+t exec zathura ~/MEGA/Archive/Weekly_Review_Checklist.pdf;
 
 # Print Screen
 
@@ -218,7 +214,6 @@ for_window [class=" "] floating enable
 for_window [class="uk-ac-starlink-topcat-Driver"] floating enable
 for_window [class="cds-aladin-Aladin"] floating enable
 
-assign [class="todoist"] workspace 10
 
 # Pulse Audio controls
 

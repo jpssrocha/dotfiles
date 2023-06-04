@@ -25,6 +25,7 @@ Plug 'maxmellon/vim-jsx-pretty'
 Plug 'alvan/vim-closetag'
 Plug 'pantharshit00/vim-prisma'
 Plug 'starcraftman/vim-eclim'
+Plug 'tpope/vim-commentary'
 
 call plug#end()
 
