@@ -146,6 +146,7 @@ autocmd FileType markdown noremap <F2> :w<Enter> :!pandoc \
              \--pdf-engine=xelatex \
              \-V geometry:"top=2cm, bottom=1.5cm, left=2cm, right=2cm" \
              \-o $(echo %:r.pdf) %  <Enter>
+
 autocmd FileType markdown noremap <F3> :!zathura $(echo $(echo % \| rev \| cut -f1 -d/ \| rev \| cut -f1 -d.).pdf) &<Enter><Enter>
 autocmd FileType markdown nnoremap <leader>h :r ~/Dropbox/.latex/markdown_header.md<Enter>kdd<leader>n
 " autocmd FileType markdown :hi link markdownError Normal<cr>
