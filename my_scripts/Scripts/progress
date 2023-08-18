@@ -1,0 +1,30 @@
+#! /usr/bin/env python3
+"""
+Script to help me keep track of the number of days to important dates
+"""
+
+from datetime import date
+
+
+def main():
+    today = date.today()
+
+    end = date(2023, 12, 14)
+    start = date(2023, 7, 3)
+
+    diff_end = end - today
+    diff_start = today - start
+
+    event = "End of the last semester"
+
+    total = end - start
+
+    print(f"Event: {event}\n")
+    print(f"\tEllapsed time : {diff_start.days} days ({abs(diff_start).days//30} months and {abs(diff_start).days % 30} days) ({start}) ") 
+    print(f"\tTo end        : {diff_end.days} days ({diff_end.days//30} months and {diff_end.days % 30} days) ({end})")
+    print(f"\tProgress      : {diff_start.days/total.days*100:.2f}%\n")
+
+if __name__ == "__main__":
+    main()
+
+
