@@ -4,7 +4,7 @@
 . "$HOME/.profile"
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/joaopedro/.oh-my-zsh"
+export ZSH="/home/jpsrocha/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -103,20 +103,20 @@ source $ZSH/oh-my-zsh.sh
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/joaopedro/mambaforge/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/home/jpsrocha/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "/home/joaopedro/mambaforge/etc/profile.d/conda.sh" ]; then
-        . "/home/joaopedro/mambaforge/etc/profile.d/conda.sh"
+    if [ -f "/home/jpsrocha/miniforge3/etc/profile.d/conda.sh" ]; then
+        . "/home/jpsrocha/miniforge3/etc/profile.d/conda.sh"
     else
-        export PATH="/home/joaopedro/mambaforge/bin:$PATH"
+        export PATH="/home/jpsrocha/miniforge3/bin:$PATH"
     fi
 fi
 unset __conda_setup
 
-if [ -f "/home/joaopedro/mambaforge/etc/profile.d/mamba.sh" ]; then
-    . "/home/joaopedro/mambaforge/etc/profile.d/mamba.sh"
+if [ -f "/home/jpsrocha/miniforge3/etc/profile.d/mamba.sh" ]; then
+    . "/home/jpsrocha/miniforge3/etc/profile.d/mamba.sh"
 fi
 # <<< conda initialize <<<
 
@@ -193,7 +193,7 @@ fi
 
 # Plugins
 
-source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Development variables
 
@@ -207,3 +207,4 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 [ -f "/home/joaopedro/.ghcup/env" ] && source "/home/joaopedro/.ghcup/env" # ghcup-env
 
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

@@ -31,7 +31,7 @@ call plug#end()
 
 " Sourcings
 
-source $HOME/.config/nvim/plug-config/coc.vim
+" source $HOME/.config/nvim/plug-config/coc.vim
 
 let mapleader = "ç"
 
@@ -248,7 +248,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 " Fix bug with nvim python by showing a specific pynvim binary on an isolated
 " environment
-let g:python3_host_prog = "$HOME/Dropbox/py_quick_access/pynvim/bin/python"
+let g:python3_host_prog = "/usr/bin/python3"
 
 " Closetag
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.js"

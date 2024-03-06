@@ -31,7 +31,7 @@ call plug#end()
 
 " Sourcings
 
-source $HOME/.config/nvim/plug-config/coc.vim
+" source $HOME/.config/nvim/plug-config/coc.vim
 
 let mapleader = "ç"
 
@@ -134,12 +134,11 @@ autocmd FileType nerdtree setlocal relativenumber " make sure relative line numb
 
 " Latex
 
-autocmd FileType tex noremap <F2> :w<Enter>:!pdflatex %  <Enter>
+autocmd FileType tex noremap <F2> :w<Enter>:!pdflatex -shell-escape %  <Enter>
 autocmd FileType tex noremap <F3> :!zathura $(echo $(echo %.pdf \| cut -f1 -d.).pdf) &<Enter><Enter>
 
 " Markdown
 autocmd FileType markdown noremap <F2> :w<Enter> :!pandoc \
-             \--filter pandoc-citeproc \
              \--from=markdown+tex_math_single_backslash+tex_math_dollars+raw_tex \
              \--to=latex \
              \--output=test.pdf \
@@ -210,9 +209,9 @@ nnoremap <leader>gdf :Git diff<CR>
 noremap <leader>f :w<cr>:Files<cr>
 
 " VimWiki
-let g:vimwiki_list = [{'path': '~/Dropbox/eBrain/vimwiki',
-                      \'path_html': '~/Dropbox/eBrain/vimwiki_html',
-                      \'template_path': '$HOME/Dropbox/eBrain/vimwiki/templates',
+let g:vimwiki_list = [{'path': '$HOME/MEGA/Resources/eBrain/vimwiki',
+                      \'path_html': '$HOME/MEGA/Resources/eBrain/vimwiki_html',
+                      \'template_path': '$HOME/MEGA/Resources/eBrain/vimwiki/templates',
                       \'template_default': 'default',
                       \'template_ext': '.html'}]
 
@@ -261,7 +260,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 " Fix bug with nvim python by showing a specific pynvim binary on an isolated
 " environment
-let g:python3_host_prog = "$HOME/Dropbox/py_quick_access/pynvim/bin/python"
+" let g:python3_host_prog = "$HOME/Dropbox/py_quick_access/pynvim/bin/python"
 
 " Closetag
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.erb,*.jsx,*.js"

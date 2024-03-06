@@ -124,7 +124,17 @@ endsnippet
 
 snippet \frame "New beamer frame" b
 \begin{frame}
-	\frametitle{${1:Title}}
-	${0:Content}
+	\frametitle{${1:title}}
+	${0:content}
+\end{frame}
+endsnippet
+
+snippet \mintframe "Frame with minted code" b
+\begin{frame}[fragile]
+	\frametitle{${1:title}}
+	${0:content}
+	\begin{minted}[fontsize=\small, autogobble]{python}
+		${2:code}
+	\end{minted}
 \end{frame}
 endsnippet

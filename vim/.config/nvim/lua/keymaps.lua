@@ -18,12 +18,11 @@ map("n", "<C-Right>", ":vertical resize +2<CR>")
 map("n",  "<C-Left>", ":vertical resize -2<CR>")
 
 -- General mappings
-map({"n", "i"}, "<F6>", "setlocal spell! spelllang=en_us<CR>")
-map({"n", "i"}, "<F7>", "setlocal spell! spelllang=pt_br<CR>")
+map({"n", "i"}, "<F6>", "<cmd>setlocal spell! spelllang=en_us<CR>")
+map({"n", "i"}, "<F7>", "<cmd>setlocal spell! spelllang=pt_br<CR>")
 map({"n", "i"}, "<leader>rc", "split ~/.vimrc<CR>")
 map({"n", "i"}, "<C-s>", "w<CR>")
-map({"n", "i"}, "<leader>t", ':.!date +"\\# \\%d-\\%m-\\%Y \\%H:\\%M" <Enter>o<Enter>')
-map(       "v", "<leader>r", "hy:%s/<C-r>h//gc<left><left><left>")
+map({"n", "i"}, "<leader>t", '<cmd>.!date +"\\# \\%d-\\%m-\\%Y \\%H:\\%M" <Enter>o<Enter>')
 
 -- Dumb remaps
 map("n",  "Y", "y$")
@@ -58,4 +57,4 @@ map("n", "<C-k>", '<C-w>k')
 map("n", "<C-l>", '<C-w>l')
 
 --  Guide navigation
-map({"n", "i"}, "<leader>n", '<Esc>/<++><Enter>"_c4l')
+map("n", "<leader>n", '<Esc>/<++><Enter>"_c4l')
