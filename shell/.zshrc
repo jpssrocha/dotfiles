@@ -1,10 +1,12 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-. "$HOME/.profile"
+# . "$HOME/.profile"
+. "$HOME/.cargo/env"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/jpsrocha/.oh-my-zsh"
+export PATH=$PATH:$HOME/MEGA/System_Setup/bin
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -141,7 +143,7 @@ export DATA="$HOME/Documents/Data" # Data of data-intensive projects
 
 #   Vim
 alias vi="nvim"
-alias vrc="nvim ~/dotfiles/vim/.config/nvim/init.vim"
+alias vrc="nvim ~/dotfiles/vim/.config/nvim/init.lua -c 'cd %:p:h'"
 alias vf='vi -c Files'
 alias vw='vi -c VimwikiIndex'
 alias vs='cd  ~/.local/share/nvim/swap'
