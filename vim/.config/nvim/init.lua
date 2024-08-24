@@ -801,17 +801,3 @@ require('lazy').setup {
     },
   },
 }
-
--- The line beneath this is called `modeline`. See `:help modeline`
--- vim: ts=2 sts=2 sw=2 et
--- require('lspconfig').ltex.setup {
---   filetypes = { 'text', 'plaintext', 'markdown', 'md', 'pandoc', 'vimwiki.markdown.pandoc' },
---   flags = { debounce_text_changes = 300 },
---   settings = {
---     ltex = {
---       -- language = "en"
---       language = 'pt-br',
---     },
---   },
---   on_attach = on_attach,
--- }
