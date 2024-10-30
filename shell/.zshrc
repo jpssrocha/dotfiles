@@ -146,12 +146,13 @@ alias vi="nvim"
 alias vrc="nvim ~/dotfiles/vim/.config/nvim/init.lua -c 'cd %:p:h'"
 alias vf='vi -c Files'
 alias vw='vi -c VimwikiIndex'
-alias vs='cd  ~/.local/share/nvim/swap'
+alias vs='cd  ~/.local/state/nvim/swap/'
 
 #   Filesystem
 alias t='tree -L 2'
-alias l='ls -lh'
-alias la='ls -a'
+alias ls='exa --icons'
+alias la='exa -a --icons'
+alias ll='exa -l --icons'
 alias d='du -sh * | sort -rh'
 alias md='mkdir -p'
 alias cp="cp -r"
