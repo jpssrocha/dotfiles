@@ -159,6 +159,7 @@ alias cp="cp -r"
 alias rr="rm -r"
 alias sudo='sudo '
 alias op="xdg-open"
+alias cat="bat"
 
 #   Python
 alias p='python -i'
@@ -211,3 +212,4 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -f "/home/joaopedro/.ghcup/env" ] && source "/home/joaopedro/.ghcup/env" # ghcup-env
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(uvx --generate-shell-completion zsh)"
