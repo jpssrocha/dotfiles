@@ -137,16 +137,9 @@ vim.opt.rtp:prepend(lazypath)
 --
 --  To update plugins, you can run
 --    :Lazy update
---
--- NOTE: Here is where you install your plugins.
 require('lazy').setup {
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
-  -- NOTE: Plugins can also be added by using a table,
-  -- with the first argument being the link and the following
-  -- keys can be used to configure plugin behavior/loading/etc.
-  --
   -- Use `opts = {}` to force a plugin to be loaded.
   --
   --  This is equivalent to:
@@ -154,12 +147,6 @@ require('lazy').setup {
 
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
-
-  -- Here is a more advanced example where we pass configuration
-  -- options to `gitsigns.nvim`. This is equivalent to the following lua:
-  --    require('gitsigns').setup({ ... })
-  --
-  -- See `:help gitsigns` to understand what the configuration keys do
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -710,16 +697,37 @@ require('lazy').setup {
   },
   {
     'karb94/neoscroll.nvim',
-    config = function()
-      require('neoscroll').setup {}
-    end,
+    opts = {},
   },
 
   {
     'folke/flash.nvim',
     event = 'VeryLazy',
+    config = function()
+      vim.api.nvim_command 'hi clear FlashMatch'
+      vim.api.nvim_command 'hi clear FlashCurrent'
+      vim.api.nvim_command 'hi clear FlashLabel'
+
+      vim.api.nvim_command 'hi FlashMatch guibg=#4A47A3 guifg=#B8B5FF' -- Emerald background
+      vim.api.nvim_command 'hi FlashCurrent guibg=#456268 guifg=#D0E8F2'
+      vim.api.nvim_command 'hi FlashLabel guibg=#A25772 guifg=#EEF5FF'
+    end,
     ---@type Flash.Config
-    opts = {},
+    opts = {
+      rainbow = {
+        enabled = true,
+        shade = 5,
+      },
+      highlight = {
+        backdrop = true,
+        groups = {
+          match = 'FlashMatch',
+          current = 'FlashCurrent',
+          backdrop = 'FlashBackdrop',
+          label = 'FlashLabel',
+        },
+      },
+    },
     -- stylua: ignore
     keys = {
       { "<leader>j", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
@@ -731,50 +739,7 @@ require('lazy').setup {
   },
 
   {
-    'nvim-tree/nvim-web-devicons',
-    config = function()
-      require('nvim-web-devicons').setup {
-        -- your personnal icons can go here (to override)
-        -- you can specify color or cterm_color instead of specifying both of them
-        -- DevIcon will be appended to `name`
-        override = {
-          zsh = {
-            icon = '',
-            color = '#428850',
-            cterm_color = '65',
-            name = 'Zsh',
-          },
-        },
-        -- globally enable different highlight colors per icon (default to true)
-        -- if set to false all icons will have the default icon's color
-        color_icons = true,
-        -- globally enable default icons (default to false)
-        -- will get overriden by `get_icons` option
-        default = true,
-        -- globally enable "strict" selection of icons - icon will be looked up in
-        -- different tables, first by filename, and if not found by extension; this
-        -- prevents cases when file doesn't have any extension but still gets some icon
-        -- because its name happened to match some extension (default to false)
-        strict = true,
-        -- same as `override` but specifically for overrides by filename
-        -- takes effect when `strict` is true
-        override_by_filename = {
-          ['.gitignore'] = {
-            icon = '',
-            color = '#f1502f',
-            name = 'Gitignore',
-          },
-        },
-        -- same as `override` but specifically for overrides by extension
-        -- takes effect when `strict` is true
-        override_by_extension = {
-          ['log'] = {
-            icon = '',
-            color = '#81e043',
-            name = 'Log',
-          },
-        },
-      }
-    end,
+    'nvim-treesitter/nvim-treesitter-context',
+    event = 'VeryLazy',
   },
 }
