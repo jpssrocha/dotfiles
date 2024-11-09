@@ -6,7 +6,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/jpsrocha/.oh-my-zsh"
-export PATH=$PATH:$HOME/MEGA/System_Setup/bin
+export PATH=$PATH:$HOME/MEGA/Working/System_Setup/bin
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -177,6 +177,7 @@ alias scc="ffmpeg -y -f x11grab -s $(xdpyinfo | grep dimensions | awk '{print $2
 alias flow="loffice $WD/finances/res/legacy_system/flow_11-05-2022.csv"
 alias savings="vi -c 'norm G' /home/joaopedro/Dropbox/eBrain/finances/res/legacy_system/flow_savings.csv"
 alias balance="vi -c 'norm G' /home/joaopedro/Dropbox/eBrain/finances/res/legacy_system/accounts.csv"
+alias vpn-lncc="sudo vpnc /etc/vpnc/lncc.conf"
 
 # Functions
 pjt () {cd $(find $PJT -type d -not -path '*/.*' -not -path '*/node_modules*' |  fzf)};
@@ -212,4 +213,7 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 [ -f "/home/joaopedro/.ghcup/env" ] && source "/home/joaopedro/.ghcup/env" # ghcup-env
 
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 eval "$(uvx --generate-shell-completion zsh)"
+
+export RUSTC_WRAPPER=sccache
