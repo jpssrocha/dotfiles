@@ -201,7 +201,7 @@ bindsym $mod+b exec pcmanfm-qt
 # General Shortcuts
 
 bindsym $mod+t exec firefox www.todoist.com
-bindsym $mod+Shift+t exec zathura ~/MEGA/Archive/Weekly_Review_Checklist.pdf
+bindsym $mod+Shift+t exec zathura ~/MEGA/Archive/GTD/Weekly_Review_Checklist.pdf
 bindsym $mod+m exec thunderbird
 bindsym $mod+c exec sxiv ~/MEGA/Archive/gtd-clarify-flow.png
 
