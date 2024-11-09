@@ -159,7 +159,6 @@ alias cp="cp -r"
 alias rr="rm -r"
 alias sudo='sudo '
 alias op="xdg-open"
-alias cat="bat"
 
 #   Python
 alias p='python -i'
