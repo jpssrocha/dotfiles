@@ -1,4 +1,5 @@
--- Commands
+-- [[ Setting options ]]
+-- See `:help vim.opt`
 
 local g_options = {
 
@@ -36,8 +37,6 @@ local g_options = {
 }
 
 -- Apply configs
-
-print 'running stuff'
 
 for key, val in pairs(g_options) do
   vim.opt[key] = val

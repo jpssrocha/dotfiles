@@ -50,11 +50,11 @@ map('v', '<leader>S', ':%s//g<Left><Left>')
 map('v', '<', '<gv')
 map('v', '>', '>gv')
 
--- -- Better split navigation
--- map('n', '<C-h>', '<C-w>h')
--- map('n', '<C-j>', '<C-w>j')
--- map('n', '<C-k>', '<C-w>k')
--- map('n', '<C-l>', '<C-w>l')
+-- Better split navigation
+map('n', '<C-h>', '<C-w>h')
+map('n', '<C-j>', '<C-w>j')
+map('n', '<C-k>', '<C-w>k')
+map('n', '<C-l>', '<C-w>l')
 
 --  Guide navigation
 map('n', '<leader>n', '<Esc>/<++><Enter>"_c4l')
