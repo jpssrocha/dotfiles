@@ -195,7 +195,7 @@ bindsym $mod+Shift+x exec i3lock
 
 # Navigators
  
-bindsym $mod+n exec firefox
+bindsym $mod+n exec chromium
 bindsym $mod+b exec pcmanfm-qt
 
 # General Shortcuts
@@ -207,7 +207,7 @@ bindsym $mod+c exec sxiv ~/MEGA/Archive/gtd-clarify-flow.png
 
 # Print Screen
 
-bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/'
+bindsym Print exec flameshot gui
 
 # Window opening
 
@@ -228,10 +228,13 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute s
 exec_always --no-startup-id feh --bg-center /home/joaopedro/Pictures/wallpaper.jpg
 
 # Applets
-exec_always nm-applet
-exec_always --no-startup-id xfce4-power-manager
+exec --no-startup-id nm-applet
+exec --no-startup-id blueman-applet
+exec --no-startup-id xfce4-power-manager
 exec --no-startup-id redshift-gtk -l -22.50:-43.18 -t 6500:2000
 exec --no-startup-id megasync
+exec --no-startup-id volumeicon
+exec --no-startup-id flameshot
 exec --no-startup-id solaar -w hide
 exec --no-startup-id compton -f -D 2
 

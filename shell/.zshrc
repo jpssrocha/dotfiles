@@ -6,7 +6,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/jpsrocha/.oh-my-zsh"
-export PATH=$PATH:$HOME/MEGA/Working/System_Setup/bin
+export PATH=$PATH:$HOME/MEGA/Working/System_Setup/bin:$HOME/MEGA/Working/System_Setup/individual_installs/ParaView-4.4.0-Qt4-OpenGL2-Linux-64bit/bin/
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -127,15 +127,15 @@ fi
 # It's better to set the PATH variable on .profile !!!
 #export PATH="$HOME/Dropbox/scripts:/home/joaopedro/eclipse/java-2020-03/eclipse:/home/joaopedro/.joplin:$PATH"
 #export PATH="$HOME/Dropbox/stand-alone:$HOME/Dropbox/scripts:$HOME/anaconda3:$PATH"
-#
+
 export PKG_CONFIG_PATH="$HOME/anaconda3/lib/pkgconfig"
-export PJT="$HOME/MEGA/Projects"
-export WD="$HOME/MEGA/WD"
+export PJT="$HOME/MEGA/Working/Projects"
+export WD="$HOME/MEGA/Working/WD"
 export ARCHIVE="$HOME/MEGA/Archive"
-export REF="$HOME/MEGA/Reference"
+export REF="$HOME/MEGA/Working/Reference"
 export WDP="$PJT/active/Research_Wild-Duck-Pipeline_1-1-2019/res/WildDuckPipe"
 export PYTHONPATH="$HOME/Dropbox/py_quick_access:$WDP:$PJT/active/Research_RRLyr-Completeness_25-04-2021/res/gaia_getter"
-export EDITOR="nvim"
+export EDITOR="hx"
 export NOTES="$HOME/Dropbox/Notebooks"
 export DATA="$HOME/Documents/Data" # Data of data-intensive projects
 
@@ -152,7 +152,8 @@ alias vs='cd  ~/.local/state/nvim/swap/'
 alias t='tree -L 2'
 alias ls='exa --icons'
 alias la='exa -a --icons'
-alias ll='exa -l --icons'
+alias ll='exa -l --icons --git'
+alias cat='bat'
 alias d='du -sh * | sort -rh'
 alias md='mkdir -p'
 alias cp="cp -r"
@@ -169,14 +170,15 @@ alias jn="jupyter notebook"
 
 #   Utils
 alias ds9="ds9 -scale mode zscale -zoom .25"
-export md2pdf="pandoc --pdf-engine=xelatex --variable geometry:\"top=2cm, bottom=1.5cm, left=2.5cm, right=2.5cm\" --variable fontsize:12pt -o"
 alias scc="ffmpeg -y -f x11grab -s $(xdpyinfo | grep dimensions | awk '{print $2}') -i :0.0  -f alsa -i default  -c:v libx264 -r 30 -c:a flac"
+alias tw="typst watch"
 
 # Easy access
 alias flow="loffice $WD/finances/res/legacy_system/flow_11-05-2022.csv"
 alias savings="vi -c 'norm G' /home/joaopedro/Dropbox/eBrain/finances/res/legacy_system/flow_savings.csv"
 alias balance="vi -c 'norm G' /home/joaopedro/Dropbox/eBrain/finances/res/legacy_system/accounts.csv"
 alias vpn-lncc="sudo vpnc /etc/vpnc/lncc.conf"
+alias jpme="cd $HOME/MEGA/Working/WD/Networking/jprocha.me"
 
 # Functions
 pjt () {cd $(find $PJT -type d -not -path '*/.*' -not -path '*/node_modules*' |  fzf)};
@@ -191,9 +193,6 @@ function cd {
  pwd > ~/.last_dir
 }
 
-if [ -f ~/.last_dir ]
- then cd `cat ~/.last_dir`
-fi
 
 # Plugins
 
@@ -203,15 +202,26 @@ fi
 
 # Python stuff
 export PIPENV_VENV_IN_PROJECT=1
+eval "$(uvx --generate-shell-completion zsh)"
 
 # Node stuff
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
-
 [ -f "/home/joaopedro/.ghcup/env" ] && source "/home/joaopedro/.ghcup/env" # ghcup-env
-
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-eval "$(uvx --generate-shell-completion zsh)"
+# Rust stuff
 export RUSTC_WRAPPER=sccache
+
+export PROMPT='%(!.%{%F{yellow}%}.)$USER@%{$fg[white]%}%M ${ret_status} %{$fg[cyan]%}%c%{$reset_color%} $(git_prompt_info)'
+
+. "$HOME/.local/bin/env"
+
+
+if [ -f ~/.last_dir ]
+ then cd `cat ~/.last_dir`
+fi
+
+# Zoxide
+eval "$(zoxide init zsh)"
+alias cd='z'
