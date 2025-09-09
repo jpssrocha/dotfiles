@@ -6,7 +6,7 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/jpsrocha/.oh-my-zsh"
-export PATH=$PATH:$HOME/MEGA/Working/System_Setup/bin:$HOME/MEGA/Working/System_Setup/individual_installs/ParaView-4.4.0-Qt4-OpenGL2-Linux-64bit/bin/
+export PATH=$PATH:$HOME/MEGA/Working/System_Setup/bin:$HOME/.local/bin
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -101,42 +101,17 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/jpsrocha/miniforge3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/jpsrocha/miniforge3/etc/profile.d/conda.sh" ]; then
-        . "/home/jpsrocha/miniforge3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/jpsrocha/miniforge3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-
-if [ -f "/home/jpsrocha/miniforge3/etc/profile.d/mamba.sh" ]; then
-    . "/home/jpsrocha/miniforge3/etc/profile.d/mamba.sh"
-fi
-# <<< conda initialize <<<
 
 # Custom environment variables
 
 # It's better to set the PATH variable on .profile !!!
-#export PATH="$HOME/Dropbox/scripts:/home/joaopedro/eclipse/java-2020-03/eclipse:/home/joaopedro/.joplin:$PATH"
-#export PATH="$HOME/Dropbox/stand-alone:$HOME/Dropbox/scripts:$HOME/anaconda3:$PATH"
 
 export PKG_CONFIG_PATH="$HOME/anaconda3/lib/pkgconfig"
 export PJT="$HOME/MEGA/Working/Projects"
 export WD="$HOME/MEGA/Working/WD"
 export ARCHIVE="$HOME/MEGA/Archive"
 export REF="$HOME/MEGA/Working/Reference"
-export WDP="$PJT/active/Research_Wild-Duck-Pipeline_1-1-2019/res/WildDuckPipe"
-export PYTHONPATH="$HOME/Dropbox/py_quick_access:$WDP:$PJT/active/Research_RRLyr-Completeness_25-04-2021/res/gaia_getter"
 export EDITOR="hx"
-export NOTES="$HOME/Dropbox/Notebooks"
 export DATA="$HOME/Documents/Data" # Data of data-intensive projects
 
 # Aliases
@@ -144,16 +119,13 @@ export DATA="$HOME/Documents/Data" # Data of data-intensive projects
 #   Vim
 alias vi="nvim"
 alias vrc="nvim ~/dotfiles/vim/.config/nvim/init.lua -c 'cd %:p:h'"
-alias vf='vi -c Files'
-alias vw='vi -c VimwikiIndex'
 alias vs='cd  ~/.local/state/nvim/swap/'
 
 #   Filesystem
 alias t='tree -L 2'
-alias ls='exa --icons'
-alias la='exa -a --icons'
-alias ll='exa -l --icons --git'
-alias cat='bat'
+alias ls='exa --icons --git --group-directories-first'
+alias la='eza -a'
+alias ll='eza -l'
 alias d='du -sh * | sort -rh'
 alias md='mkdir -p'
 alias cp="cp -r"
@@ -165,7 +137,6 @@ alias op="xdg-open"
 alias p='python -i'
 alias python="python3"
 alias ipy="ipython"
-alias acb="conda activate base"
 alias jn="jupyter notebook"
 
 #   Utils
@@ -177,8 +148,14 @@ alias tw="typst watch"
 alias flow="loffice $WD/finances/res/legacy_system/flow_11-05-2022.csv"
 alias savings="vi -c 'norm G' /home/joaopedro/Dropbox/eBrain/finances/res/legacy_system/flow_savings.csv"
 alias balance="vi -c 'norm G' /home/joaopedro/Dropbox/eBrain/finances/res/legacy_system/accounts.csv"
-alias vpn-lncc="sudo vpnc /etc/vpnc/lncc.conf"
 alias jpme="cd $HOME/MEGA/Working/WD/Networking/jprocha.me"
+
+# Adresses
+
+export sV17="virtual17.ccc03.lncc.br"
+export sV19="virtual19.ccc03.lncc.br"
+export sV21="imp1a46.ccc1.lncc.br"
+export pc1A10="146.134.61.2"
 
 # Functions
 pjt () {cd $(find $PJT -type d -not -path '*/.*' -not -path '*/node_modules*' |  fzf)};
@@ -201,13 +178,11 @@ function cd {
 # Development variables
 
 # Python stuff
-export PIPENV_VENV_IN_PROJECT=1
-eval "$(uvx --generate-shell-completion zsh)"
+# eval "$(uvx --generate-shell-completion zsh)"
 
 # Node stuff
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -f "/home/joaopedro/.ghcup/env" ] && source "/home/joaopedro/.ghcup/env" # ghcup-env
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Rust stuff
@@ -222,6 +197,17 @@ if [ -f ~/.last_dir ]
  then cd `cat ~/.last_dir`
 fi
 
-# Zoxide
-eval "$(zoxide init zsh)"
-alias cd='z'
+. "$HOME/.local/share/../bin/env"
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE='/home/jpsrocha/miniforge3/bin/mamba';
+export MAMBA_ROOT_PREFIX='/home/jpsrocha/miniforge3';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
